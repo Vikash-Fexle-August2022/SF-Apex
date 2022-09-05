@@ -23,6 +23,5 @@ public class staticWaysToDealsWithCollections {
         	    MapOfState2.put('California',ListOfCity2);
         		MapOfCountryWithCityAndStates.put('US',MapOfState2);
       System.debug(MapOfCountryWithCityAndStates);      
-    }
-    
+    } 
 }
