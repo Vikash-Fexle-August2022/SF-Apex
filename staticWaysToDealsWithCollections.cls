@@ -1,9 +1,10 @@
 public class staticWaysToDealsWithCollections {
-   public staticWaysToDealsWithCollections(){
+   // Create Constructor.  
+   public staticWaysToDealsWithCollections(){  
          Map<String,Map<String,List<String>>> MapOfCountryWithCityAndStates = new Map<String,Map<String,List<String>>>();
          Map<String,List<String>> MapOfState=new  Map<String,List<String>>();  
            List<String>ListOfCity=new List<String>();
-          
+    // add all the data in List & Map which is i want to show in a column.     
        		 ListOfCity.add('Patna');
              ListOfCity.add('Darbhanga');
         	    MapOfState.put('Bihar',ListOfCity);
@@ -23,6 +24,5 @@ public class staticWaysToDealsWithCollections {
         	    MapOfState2.put('California',ListOfCity2);
         		MapOfCountryWithCityAndStates.put('US',MapOfState2);
       System.debug(MapOfCountryWithCityAndStates);      
-    }
-    
+    } 
 }
