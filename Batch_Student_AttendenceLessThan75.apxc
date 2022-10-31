@@ -1,0 +1,39 @@
+public without sharing class Batch_Student_AttendenceLessThan75 implements Database.Batchable<sObject>, Database.Stateful {
+        // instance member to retain state across transactions
+    public string query;
+    public string log;
+      
+    public Database.QueryLocator start(Database.BatchableContext BC){
+         // collect the batches of records or objects to be passed to execute
+        return Database.getQueryLocator(query);
+    }
+    
+    public void execute(Database.BatchableContext BC, List<sObject> scope){
+        //Add List of student Less than 75%.
+        List<Student__c> updateList = new List<Student__c>();
+        for(sObject s : scope){
+            Student__c std = (Student__c)s;
+            std.Email_Sent__c = True;
+             log= log +'  '+ (String)std.Name;
+             
+            updateList.add(std);
+        }
+        if(updateList.size()>0)
+        {
+            update updateList; 
+        }
+    }
+    
+  public void finish(Database.BatchableContext BC){
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        
+        mail.setToAddresses(new String[] {'vikashkumarg054@gmail.com'});
+        mail.setReplyTo('batch@acme.com');
+        mail.setSenderDisplayName('Batch Processing');
+        mail.setSubject(' Attendance less than 75 % ');
+        mail.setPlainTextBody('Batch Process has completed ' + log);
+         // call some utility to send email.
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    }
+    
+}
